@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{57FAD2A7-5080-4633-B3AD-599FB2A45A8F}</ProjectGuid>
+    <ProjectGuid>{0F627889-2D91-4028-BB78-0EF06545F378}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>luac</RootNamespace>
+    <RootNamespace>cplusplusInvokeLua</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)tmp\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -78,32 +79,34 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\</OutDir>
+    <OutDir>$(SolutionDir)bin</OutDir>
+    <IntDir>$(SolutionDir)tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)D$(TargetExt)</OutputFile>
+      <AdditionalDependencies>$(solutiondir)bin\lua53D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,12 +116,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,17 +129,18 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)R$(TargetExt)</OutputFile>
+      <AdditionalDependencies>$(solutiondir)bin\lua53R.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,49 +150,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\lapi.c" />
-    <ClCompile Include="..\src\lauxlib.c" />
-    <ClCompile Include="..\src\lbaselib.c" />
-    <ClCompile Include="..\src\lbitlib.c" />
-    <ClCompile Include="..\src\lcode.c" />
-    <ClCompile Include="..\src\lcorolib.c" />
-    <ClCompile Include="..\src\lctype.c" />
-    <ClCompile Include="..\src\ldblib.c" />
-    <ClCompile Include="..\src\ldebug.c" />
-    <ClCompile Include="..\src\ldo.c" />
-    <ClCompile Include="..\src\ldump.c" />
-    <ClCompile Include="..\src\lfunc.c" />
-    <ClCompile Include="..\src\lgc.c" />
-    <ClCompile Include="..\src\linit.c" />
-    <ClCompile Include="..\src\liolib.c" />
-    <ClCompile Include="..\src\llex.c" />
-    <ClCompile Include="..\src\lmathlib.c" />
-    <ClCompile Include="..\src\lmem.c" />
-    <ClCompile Include="..\src\loadlib.c" />
-    <ClCompile Include="..\src\lobject.c" />
-    <ClCompile Include="..\src\lopcodes.c" />
-    <ClCompile Include="..\src\loslib.c" />
-    <ClCompile Include="..\src\lparser.c" />
-    <ClCompile Include="..\src\lstate.c" />
-    <ClCompile Include="..\src\lstring.c" />
-    <ClCompile Include="..\src\lstrlib.c" />
-    <ClCompile Include="..\src\ltable.c" />
-    <ClCompile Include="..\src\ltablib.c" />
-    <ClCompile Include="..\src\ltm.c" />
-    <ClCompile Include="..\src\luac.c" />
-    <ClCompile Include="..\src\lundump.c" />
-    <ClCompile Include="..\src\lutf8lib.c" />
-    <ClCompile Include="..\src\lvm.c" />
-    <ClCompile Include="..\src\lzio.c" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="luac.rc" />
+    <ClCompile Include="cplusplusInvokeLua.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
+    <ResourceCompile Include="cplusplusInvokeLua.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="cplusplus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lua53\lua53.vcxproj">
+      <Project>{ee465182-833f-43e8-93fe-ba0963d4a3df}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
